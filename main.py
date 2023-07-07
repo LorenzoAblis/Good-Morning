@@ -4,95 +4,107 @@ from bs4 import BeautifulSoup as bs
 import customtkinter as ctk
 import webbrowser
 
-#test
+
 class Scraper:
     @staticmethod
     def scrape_cnn_articles():
-        url = "https://www.cnn.com/world"
-        response = requests.get(url)
-        html_content = response.content
-        soup = bs(html_content, 'html.parser')
-        limit = 10
-        counter = 0
-        scraped_articles = []
+        try:
+            url = "https://www.cnn.com/world"
+            response = requests.get(url)
+            html_content = response.content
+            soup = bs(html_content, 'html.parser')
+            limit = 10
+            counter = 0
+            scraped_articles = []
 
-        divs = soup.find_all(
-            'div',
-            {
-                'class': 'card container__item container__item--type-section container_lead-plus-headlines__item container_lead-plus-headlines__item--type-section'
-            },
-        )
+            divs = soup.find_all(
+                'div',
+                {
+                    'class': 'card container__item container__item--type-section container_lead-plus-headlines__item container_lead-plus-headlines__item--type-section'
+                },
+            )
 
-        for div in divs:
-            if counter >= limit:
-                break
+            for div in divs:
+                if counter >= limit:
+                    break
 
-            headline = div.find('span', {'data-editable': 'headline'})
-            link = div.find('a', {'class': 'container__link container_lead-plus-headlines__link'})
+                headline = div.find('span', {'data-editable': 'headline'})
+                link = div.find('a', {'class': 'container__link container_lead-plus-headlines__link'})
 
-            if link is not None and headline is not None:
-                article = {'headline': headline.text.strip(), 'link': link['href']}
-                scraped_articles.append(article)
-                counter += 1
+                if link is not None and headline is not None:
+                    article = {'headline': headline.text.strip(), 'link': link['href']}
+                    scraped_articles.append(article)
+                    counter += 1
 
-        return scraped_articles
+            return scraped_articles
+        except Exception as e:
+            print(f"An error occured while scraping for CNN articles: {str(e)}")
+            return []
 
     @staticmethod
     def scrape_weather():
-        url = "https://weather.com/weather/today/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b"
-        response = requests.get(url)
-        html_content = response.content
-        soup = bs(html_content, 'html.parser')
+        try:
+            url = "https://weather.com/weather/today/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b"
+            response = requests.get(url)
+            html_content = response.content
+            soup = bs(html_content, 'html.parser')
 
-        temperature = soup.find('span', {'data-testid': 'TemperatureValue'})
-        visibility = soup.find('div', {'data-testid': 'wxPhrase'})
-        rain_chance_div = soup.find('a', {'class': 'Column--innerWrapper--3ocxD Button--default--2gfm1'})
-        rain_chance = rain_chance_div.find('span', {'class': 'Column--precip--3JCDO'}).text.strip().replace(
-            'Chance of Rain', ''
-        )
-        air_quality = soup.find('text', {'data-testid': 'DonutChartValue'})
-        air_quality_category = soup.find('span', {'data-testid': 'AirQualityCategory'})
-        highlow = soup.find('div', {'class': 'WeatherDetailsListItem--wxData--kK35q'})
+            temperature = soup.find('span', {'data-testid': 'TemperatureValue'})
+            visibility = soup.find('div', {'data-testid': 'wxPhrase'})
+            rain_chance_div = soup.find('a', {'class': 'Column--innerWrapper--3ocxD Button--default--2gfm1'})
+            rain_chance = rain_chance_div.find('span', {'class': 'Column--precip--3JCDO'}).text.strip().replace(
+                'Chance of Rain', ''
+            )
+            air_quality = soup.find('text', {'data-testid': 'DonutChartValue'})
+            air_quality_category = soup.find('span', {'data-testid': 'AirQualityCategory'})
+            highlow = soup.find('div', {'class': 'WeatherDetailsListItem--wxData--kK35q'})
 
-        weather_data = {
-            'Temperature': temperature.text.strip(),
-            'Visibility': visibility.text.strip(),
-            'Rain Chance': rain_chance,
-            'Air Quality': f"{air_quality.text.strip()}, {air_quality_category.text.strip()}",
-            'High/Low': highlow.text.strip(),
-        }
+            weather_data = {
+                'Temperature': temperature.text.strip(),
+                'Visibility': visibility.text.strip(),
+                'Rain Chance': rain_chance,
+                'Air Quality': f"{air_quality.text.strip()}, {air_quality_category.text.strip()}",
+                'High/Low': highlow.text.strip(),
+            }
 
-        return weather_data
+            return weather_data
+        except Exception as e:
+            print(f"An error occured while scraping for weather: {str(e)}")
+            return {}
 
     @staticmethod
     def scrape_forecast():
-        url = "https://weather.com/weather/tenday/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b"
-        response = requests.get(url)
-        html_content = response.content
-        soup = bs(html_content, 'html.parser')
+        try:
+            url = "https://weather.com/weather/tenday/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b"
+            response = requests.get(url)
+            html_content = response.content
+            soup = bs(html_content, 'html.parser')
 
-        details = soup.find_all(
-            'details', {'class': 'DaypartDetails--DayPartDetail--2XOOV Disclosure--themeList--1Dz21'}
-        )
-        limit = 10
-        counter = 0
+            details = soup.find_all(
+                'details', {'class': 'DaypartDetails--DayPartDetail--2XOOV Disclosure--themeList--1Dz21'}
+            )
+            limit = 10
+            counter = 0
 
-        forecast_data = []
+            forecast_data = []
 
-        for detail in details:
-            if counter >= limit:
-                break
+            for detail in details:
+                if counter >= limit:
+                    break
 
-            day = detail.find('h3', {'data-testid': 'daypartName'}).text.strip()
-            highlow = detail.find('div', {'class': 'DetailsSummary--temperature--1kVVp'}).text.strip()
-            rain_chance = detail.find('span', {'data-testid': 'PercentageValue'}).text.strip()
+                day = detail.find('h3', {'data-testid': 'daypartName'}).text.strip()
+                highlow = detail.find('div', {'class': 'DetailsSummary--temperature--1kVVp'}).text.strip()
+                rain_chance = detail.find('span', {'data-testid': 'PercentageValue'}).text.strip()
 
-            if day != "Today" or day != "Tonight":
-                forecast = {'day': day, 'highlow': highlow, 'rain_chance': rain_chance}
-                forecast_data.append(forecast)
-                counter += 1
+                if day != "Today" or day != "Tonight":
+                    forecast = {'day': day, 'highlow': highlow, 'rain_chance': rain_chance}
+                    forecast_data.append(forecast)
+                    counter += 1
 
-        return forecast_data
+            return forecast_data
+        except Exception as e:
+            print(f"An error occured while scraping for the forecast: {str(e)}")
+            return []
 
 
 class App(ctk.CTk):
