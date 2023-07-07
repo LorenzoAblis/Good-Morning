@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as bs
 import customtkinter as ctk
 import webbrowser
 
-
+#test
 class Scraper:
     @staticmethod
     def scrape_cnn_articles():
