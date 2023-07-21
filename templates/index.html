@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Good Morning</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    
+</head>
+<body>
+    <header id="header">
+        <h1 id="good-morning-title">Good Morning Enzo</h1>
+    </header>
+
+    <div class="frame news-frame">
+        <a id="news-title" href="https://www.cnn.com/world" target="_blank">World News</a>
+        <br>
+        {% for article in articles %}
+        <a class="article-link" href={{ article['link'] }} target="_blank">{{ article['headline'] }}<br></a>
+        {% endfor %}
+    </div>
+
+    <div class="frame weather-frame">
+        <a id="weather-title" href="https://weather.com/weather/today/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b" target="_blank">Current Weather</a>
+        <p class="weather-text">{{ "Temperature: " + weather_data['temperature'] }}</p>
+        <p class="weather-text">{{ "Visibility: " + weather_data['visibility'] }}</p>
+        <p class="weather-text">{{ "Rain Chance: " + weather_data['rain_chance'] }}</p>
+        <p class="weather-text">{{ "Air Quality: " + weather_data['air_quality'] }}</p>
+        <p class="weather-text">{{ "High/Low: " + weather_data['high_low'] }}</p>
+    </div>
+
+    <div class="frame forecast-frame">
+        <a id="forecast-title" href="https://weather.com/weather/tenday/l/4b807770f7a9a68ab3236c14beec03d4f8471b97c32e6e9e972a36533e58559b" target="_blank">Forecast</a>
+        <br>
+        {% for day in forecast_data %}
+        <p class="forecast-text">{{ day['day'] + ", " + "High/Low: " + day['high_low'] + ", " + "Rain Chance: " + day['rain_chance'] }}</p>
+        {% endfor %}
+    </div>              
+
+    <div class="anime-frame">
+        {% for anime in anime_info %}
+        <div class="anime-item">
+          <div class="anime-image-container">
+            <img src={{ anime['cover_image'] }} alt="Anime Image">
+          </div>
+          <div class="anime-content-container">
+            <a href={{ anime['anime_url'] }} target="_blank">{{ anime['title'] }}</a> 
+            <p class="anime-info-text">{{ "Episode " + anime['episode'] + ": " + anime['time_until_airing'] }}</p>
+            <p class="anime-info-text">{{ "Airing on: " + anime['airing_at'] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+
+    <script src="../static/scripts.js"></script>
+</body>
+</html>

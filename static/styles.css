@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+#header {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(32, 134, 197);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    padding-right: 10%;
+}
+
+#good-morning-title {
+    color: white;
+    text-align: right;
+    font-size: 50px;
+    padding-left: 2%;
+}
+
+.article-link:link { 
+    font-size: 20px;
+    text-decoration: none; 
+}
+
+.article-link:hover { 
+    text-decoration: none; 
+    font-size: 25px;
+    color: rgb(187, 140, 23);
+}
+
+.article-link {
+    color: black;
+    transition: all 1s;
+}
+
+#news-title {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 35px;
+    padding: 10px;
+    color: rgb(187, 140, 23);
+}
+
+#news-title:hover {
+    text-decoration: none; 
+}
+
+#news-title:link {
+    text-decoration: none; 
+}
+
+.frame {
+    position: absolute;
+    min-width: 200px;
+    min-height: 200px;
+    background-color: rgba(128, 128, 128, 0.332);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.news-frame{
+    top: 120px;
+    left: 20px;
+}
+
+.weather-frame {
+    top: 535px;
+    left: 550px;
+}
+
+.forecast-frame {
+    top: 535px;
+    left: 20px;
+}
+
+#weather-title {
+    font-weight: bold;
+    font-size: 35px;
+    padding: 10px;
+    color: rgb(187, 140, 23);
+}
+
+#weather-title:hover {
+    text-decoration: none; 
+}
+
+#weather-title:link {
+    text-decoration: none; 
+}
+
+.weather-text {
+    font-size: 20px;
+    transition: all 1s;
+}
+
+.weather-text:hover {
+    font-size: 25px;
+}
+
+#forecast-title {
+    font-weight: bold;
+    font-size: 35px;
+    padding: 10px;
+    color: rgb(187, 140, 23);
+}
+
+#forecast-title:hover {
+    text-decoration: none; 
+}
+
+#forecast-title:link {
+    text-decoration: none; 
+}
+
+.forecast-text {
+    font-size: 20px;
+    transition: all 1s;
+}
+.forecast-text:hover {
+    font-size: 25px;
+}
+
+.anime-frame {
+  position: absolute;
+  background-color: rgba(128, 128, 128, 0.332);
+  border-radius: 10px;
+  top: 950px;
+  left: 20px;
+  padding: 10px;
+}
+
+.anime-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.anime-image-container {
+  margin-right: 10px;
+}
+
+.anime-image-container img {
+  width: 400px;
+  height: auto;
+}
+
+.anime-content-container {
+  flex-grow: 1;
+}
+
+.anime-content-container a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 35px;
+    color: rgb(187, 140, 23);
+}
+
+.anime-content-container a:hover {
+    text-decoration: none; 
+}
+
+.anime-content-container a:link {
+    text-decoration: none; 
+}
+
+.anime-content-container p {
+  font-size: 20px;
+  margin-top: 10px;
+  transition: all 1s;
+}
+
+.anime-content-container p:hover {
+    font-size: 25px;
+}
+
+
+  
